@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StJudeAssignmentDistributio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StJudeAssignmentDistribution_Implementor", "StJudeAssignmentDistribution_Implementor\StJudeAssignmentDistribution_Implementor.csproj", "{CCEB086F-826C-40DF-A704-68BC9CA3257A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StJudeAssignmentDistribution_Gui", "StJudeAssignmentDistribution_Gui\StJudeAssignmentDistribution_Gui.csproj", "{5702F9A1-ED36-4F41-872E-34D609E526FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{CCEB086F-826C-40DF-A704-68BC9CA3257A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCEB086F-826C-40DF-A704-68BC9CA3257A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCEB086F-826C-40DF-A704-68BC9CA3257A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5702F9A1-ED36-4F41-872E-34D609E526FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5702F9A1-ED36-4F41-872E-34D609E526FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5702F9A1-ED36-4F41-872E-34D609E526FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5702F9A1-ED36-4F41-872E-34D609E526FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
