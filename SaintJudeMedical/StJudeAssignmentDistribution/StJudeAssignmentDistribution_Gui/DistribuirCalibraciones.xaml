@@ -1,0 +1,28 @@
+﻿<Page x:Class="StJudeAssignmentDistribution_Gui.DistribuirCalibraciones"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="380" d:DesignWidth="840" Background="White"
+	Title="DistribuirCalibraciones">
+    <Grid>
+        <Image x:Name="ImgFooter" Stretch="UniformToFill" HorizontalAlignment="Left"  Height="58" Margin="645,321,0,0" VerticalAlignment="Top" Width="193" Source="Images/Images/SJM_Logo_RGB_LightBkgd_JPG.jpg"/>
+        <GroupBox Header="Parámetros de Distribución" FontStyle="Normal" FontWeight="Bold" FontFamily="Arial" FontSize="13" HorizontalAlignment="Left" Margin="31,68,0,0" VerticalAlignment="Top" Height="220" Width="324">
+            <Grid>
+                <Label Content="Cantidad de Personas:" HorizontalAlignment="Left" Margin="0,36,0,0" VerticalAlignment="Top"/>
+                <Button Name="BtnDistribuir" Content="Distribuir" HorizontalAlignment="Left" Margin="222,151,0,0" VerticalAlignment="Top" Width="80" Height="25" Click="BtnDistribuir_Click"/>
+                <TextBox Name="TxtCantidadPersonas" Height="25" ToolTip="Ingrese cantidad de personas" TextWrapping="Wrap" FontStyle="Normal" FontWeight="Normal" FontFamily="Tahoma" FontSize="13" Margin="156,36,10,137"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Resultado de la Distribución" FontStyle="Normal" FontWeight="Bold" FontFamily="Arial" FontSize="13" HorizontalAlignment="Left" Margin="382,68,0,0" VerticalAlignment="Top" Height="220" Width="456">
+            <Grid>
+                <DataGrid MinWidth="445" Name="DGDistribucion" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" AutoGenerateColumns="True" IsReadOnly="True" IsManipulationEnabled="True" FontStyle="Normal" FontWeight="Normal" FontFamily="Arial" FontSize="11"/>
+            </Grid>
+        </GroupBox>
+        <Label Content="Distribuir Calibraciones" FontStyle="Normal" FontWeight="Bold" FontFamily="Tahoma" FontSize="18" HorizontalAlignment="Center" Margin="0,16,0,0" VerticalAlignment="Top"/>
+        <Button Name="BtnBack" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="31,320,0,0" Background="Transparent" BorderBrush="Transparent" Click="BtnBack_Click">
+            <Image Source="Images/Icons/Back.gif" Stretch="UniformToFill"/>
+        </Button>
+    </Grid>
+</Page>

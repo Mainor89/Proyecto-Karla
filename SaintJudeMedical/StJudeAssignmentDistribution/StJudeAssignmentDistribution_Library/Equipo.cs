@@ -127,6 +127,15 @@ namespace StJudeAssignmentDistribution_Library
             get;
             set;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TiempoEstandar
+        {
+            get;
+            set;
+        }
         #endregion
     }
 }

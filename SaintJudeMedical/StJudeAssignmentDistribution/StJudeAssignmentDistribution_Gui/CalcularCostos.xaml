@@ -1,0 +1,35 @@
+﻿<Page x:Class="StJudeAssignmentDistribution_Gui.CalcularCostos"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="380" d:DesignWidth="840" Background="White" Loaded="Page_Loaded"
+	Title="CalcularCostos">
+    <Grid>
+        <Image x:Name="ImgFooter" Stretch="UniformToFill" HorizontalAlignment="Left"  Height="58" Margin="645,321,0,0" VerticalAlignment="Top" Width="193" Source="Images/Images/SJM_Logo_RGB_LightBkgd_JPG.jpg"/>
+        <GroupBox Header="Parámetros de Costos" FontStyle="Normal" FontWeight="Bold" FontFamily="Arial" FontSize="13" HorizontalAlignment="Left" Margin="31,68,0,0" VerticalAlignment="Top" Height="220" Width="324">
+            <Grid>
+                <Label Content="Costo de Mano de Obra:" HorizontalAlignment="Left" Margin="0,36,0,0" VerticalAlignment="Top"/>                
+                <TextBox Name="TxtCosto" Height="25" TextWrapping="Wrap" FontStyle="Normal" FontWeight="Normal" FontFamily="Tahoma" FontSize="13" Margin="161,36,5,137"/>
+                <Label Content="Otros Costos:" HorizontalAlignment="Left" Margin="0,78,0,0" VerticalAlignment="Top"/>
+                <TextBox Name="TxtOtrosCostos" Height="25" TextWrapping="Wrap" FontStyle="Normal" FontWeight="Normal" FontFamily="Tahoma" FontSize="13" Margin="161,78,5,95"/>
+                <Label Content="PM del Equipo:" HorizontalAlignment="Left" Margin="0,118,0,0" VerticalAlignment="Top"/>
+                <ComboBox Name="CmbxPM" FontStyle="Normal" FontWeight="Normal" FontFamily="Tahoma" FontSize="13" HorizontalAlignment="Left" Margin="161,118,0,0" VerticalAlignment="Top" Width="146" Height="25"/>
+                <Button Name="BtnCalcular" Content="Calcular" HorizontalAlignment="Left" Margin="227,161,0,0" VerticalAlignment="Top" Width="80" Height="25" Click="BtnCalcular_Click"/>
+                <Button Name="BtnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="142,161,0,0" VerticalAlignment="Top" Width="80" Height="25" Click="BtnCancelar_Click"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Costo Aproximado de Calibración" FontStyle="Normal" FontWeight="Bold" FontFamily="Arial" FontSize="13" HorizontalAlignment="Left" Margin="382,68,0,0" VerticalAlignment="Top" Height="220" Width="456">
+            <Grid>
+                <Label Name="LblCostoTitle" Content="" FontStyle="Normal" FontWeight="Bold" FontFamily="Tahoma" FontSize="18" HorizontalAlignment="Left" Margin="26,20,0,0" VerticalAlignment="Top" Foreground="#891e09"/>
+                <Label Name="LblCostoPM" Content="" FontStyle="Normal" FontWeight="Bold" FontFamily="Tahoma" FontSize="18" HorizontalAlignment="Left" Margin="60,70,0,0" VerticalAlignment="Top" Foreground="#891e09"/>
+                <Label Name="LblCosto" Content="" FontStyle="Normal" FontWeight="Bold" FontFamily="Tahoma" FontSize="18" HorizontalAlignment="Left" Margin="60,120,0,0" VerticalAlignment="Top" Foreground="#891e09"/>
+            </Grid>
+        </GroupBox>
+        <Label Content="Calcular Costos de Calibración" FontStyle="Normal" FontWeight="Bold" FontFamily="Tahoma" FontSize="18" HorizontalAlignment="Center" Margin="0,16,0,0" VerticalAlignment="Top"/>
+        <Button Name="BtnBack" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="31,320,0,0" Background="Transparent" BorderBrush="Transparent" Click="BtnBack_Click">
+            <Image Source="Images/Icons/Back.gif" Stretch="UniformToFill"/>
+        </Button>
+    </Grid>
+</Page>
