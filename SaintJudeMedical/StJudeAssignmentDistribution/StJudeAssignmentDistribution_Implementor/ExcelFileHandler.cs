@@ -106,7 +106,9 @@ namespace StJudeAssignmentDistribution_Implementor
                         TiempoEstandar = "0",
                     };
                     ListaDeEquiposCalibrar.Add(equipoTemp);
-                }                
+                }
+                MyBook.Close(true);
+                MyApp.Quit();
             }
             catch (Exception ex)
             {
@@ -134,6 +136,78 @@ namespace StJudeAssignmentDistribution_Implementor
             {
                 Console.WriteLine(ex.Message);
             }            
+        }
+
+        /// <summary>
+        /// Genera el archivo con las asignaciones de las calibraciones que el sistema creo
+        /// </summary>
+        /// <param name="pAsignaciones"></param>
+        public void GenerarArchivoAsignaciones(List<Asignacion> pAsignaciones)
+        {
+            try
+            {
+                var archivoAsignaciones = ConfigurationSettings.AppSettings.Get(EXCEL_ASSIGNMENTS_RESULT_KEY);
+                Excel.Application excel = new Excel.Application();
+                excel.DisplayAlerts = false;
+                Excel.Workbook wb = excel.Workbooks.Add();
+                Excel.Worksheet hoja;//crea una hoja
+                hoja = (Excel.Worksheet)wb.Worksheets[1];//indicas que esa hoja va a contener la hoja 1 del libro
+                hoja.Cells[1, 1] = "Nombre";
+                hoja.Cells[1, 2] = "PM";
+                hoja.Cells[1, 3] = "Work Order";
+                hoja.Cells[1, 4] = "Tiempo";
+                var row = 2;
+                foreach (var asignacion in pAsignaciones)
+                {
+                    hoja.Cells[row, 1] = asignacion.Nombre;
+                    hoja.Cells[row, 2] = asignacion.PM;
+                    hoja.Cells[row, 3] = asignacion.WorkOrder;
+                    hoja.Cells[row, 4] = asignacion.Tiempo;
+                    row++;
+                }
+                wb.SaveAs(archivoAsignaciones);
+                wb.Close(true);
+                excel.Quit();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        /// <summary>
+        /// Genera el archivo con los tiempos de los equipos actualizados
+        /// </summary>
+        /// <param name="pEquipos"></param>
+        public void GenerarArchivoEquipo(List<EquipoActualizado> pEquipos)
+        {
+            try
+            {
+                var archivoEquipos = ConfigurationSettings.AppSettings.Get(EXCEL_EQUIPMENT_RESULT_KEY);
+                Excel.Application excel = new Excel.Application();
+                excel.DisplayAlerts = false;
+                Excel.Workbook wb = excel.Workbooks.Add();                
+                Excel.Worksheet hoja;//crea una hoja
+                hoja = (Excel.Worksheet)wb.Worksheets[1];//indicas que esa hoja va a contener la hoja 1 del libro
+                hoja.Cells[1, 1] = "PM";
+                hoja.Cells[1, 2] = "Organización";
+                hoja.Cells[1, 3] = "Descripción";
+                hoja.Cells[1, 4] = "Tiempo";
+                var row = 2;
+                foreach (var equipo in pEquipos)
+                {
+                    hoja.Cells[row, 1] = equipo.PM;
+                    hoja.Cells[row, 2] = equipo.Organizacion;
+                    hoja.Cells[row, 3] = equipo.Descripcion;
+                    hoja.Cells[row, 4] = equipo.Tiempo;
+                    row++;
+                }
+                wb.SaveAs(archivoEquipos);
+                wb.Close(true);
+                excel.Quit();
+            }
+            catch (Exception ex)
+            {
+            }
         }
         #endregion
 
@@ -168,7 +242,11 @@ namespace StJudeAssignmentDistribution_Implementor
         /// <summary>
         /// 
         /// </summary>
-        private const string EXCEL_RESULT_KEY = "ResultFilePath";
+        private const string EXCEL_ASSIGNMENTS_RESULT_KEY = "ResultFilePathAssignments";
+        /// <summary>
+        /// 
+        /// </summary>
+        private const string EXCEL_EQUIPMENT_RESULT_KEY = "ResultFilePathEquipment";
         /// <summary>
         /// 
         /// </summary>

@@ -56,10 +56,10 @@ namespace StJudeAssignmentDistribution_Gui
         /// </summary>
         private void LoadDGData()
         {
-            List<dgStruct> data = new List<dgStruct>();
+            List<EquipoActualizado> data = new List<EquipoActualizado>();
             foreach (var element in ExcelFileHandler.Instance.ListaDeEquiposUnicos)
             {
-                var row = new dgStruct()
+                var row = new EquipoActualizado()
                 {
                     PM = element.PM,                                       
                     Organizacion = element.EquipmentOrg,
@@ -70,6 +70,12 @@ namespace StJudeAssignmentDistribution_Gui
             }
             GridResultado.ItemsSource = data;
             ChangeDGHeaders();
+            var generarArchivo = new System.Threading.Thread(delegate()
+            {
+                ExcelFileHandler.Instance.GenerarArchivoEquipo(data);
+            });
+            generarArchivo.IsBackground = true;
+            generarArchivo.Start();            
         }
 
         /// <summary>
@@ -109,15 +115,15 @@ namespace StJudeAssignmentDistribution_Gui
             {
                 var pm = TxtPmEquipo.Text.Trim();
                 var descripcion = TxtNombreEquipo.Text;
-                List<dgStruct> dataPm = new List<dgStruct>();
-                List<dgStruct> dataDesc = new List<dgStruct>();                
+                List<EquipoActualizado> dataPm = new List<EquipoActualizado>();
+                List<EquipoActualizado> dataDesc = new List<EquipoActualizado>();                
                 if (!string.IsNullOrEmpty(pm))
                 {
                     foreach (var element in ExcelFileHandler.Instance.ListaDeEquiposUnicos)
                     {
                         if (element.PM.ToUpperInvariant().Contains(pm.ToUpperInvariant()))
                         {
-                            var row = new dgStruct()
+                            var row = new EquipoActualizado()
                             {
                                 PM = element.PM,
                                 Organizacion = element.EquipmentOrg,
@@ -134,7 +140,7 @@ namespace StJudeAssignmentDistribution_Gui
                     {
                         if (element.Description.ToUpperInvariant().Contains(descripcion.ToUpperInvariant()))
                         {
-                            var row = new dgStruct()
+                            var row = new EquipoActualizado()
                             {
                                 PM = element.PM,
                                 Organizacion = element.EquipmentOrg,
@@ -155,7 +161,7 @@ namespace StJudeAssignmentDistribution_Gui
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             DataGridRow row = sender as DataGridRow;
-            var elem = (dgStruct)GridResultado.SelectedItem;
+            var elem = (EquipoActualizado)GridResultado.SelectedItem;
             IngTiempo.Visibility = System.Windows.Visibility.Visible;            
             IngTiempo.ActualizarCampos(elem.PM, elem.Descripcion);
         }
@@ -191,19 +197,6 @@ namespace StJudeAssignmentDistribution_Gui
         #endregion
 
         #region Attributes
-        #endregion
-
-        #region Structues
-        private struct dgStruct
-        {
-            public string PM { get; set; }                      
-            public string Organizacion { get; set; }
-            public string Descripcion { get; set; }
-            public string Tiempo { get; set; }
-        }        
-        #endregion                                
-
-        #region Attributes        
-        #endregion
+        #endregion                             
     }
 }

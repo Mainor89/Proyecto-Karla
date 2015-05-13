@@ -94,12 +94,12 @@ namespace StJudeAssignmentDistribution_Gui
         /// </summary>
         private void MostrarGridDistribucion()
         {
-            var datosGrid = new List<dgStruct>();
+            var datosGrid = new List<Asignacion>();
             foreach (var tecnico in _ResultadoDistribucionEquipos.Keys)
             {
                 foreach (var equipo in _ResultadoDistribucionEquipos[tecnico])
                 {
-                    var row = new dgStruct()
+                    var row = new Asignacion()
                     {
                         Nombre = "Técnico " + (tecnico + 1),
                         PM = equipo.PM,
@@ -111,6 +111,13 @@ namespace StJudeAssignmentDistribution_Gui
             }
             DGDistribucion.ItemsSource = datosGrid;
             ChangeDGHeaders();
+            var generarArchivo = new System.Threading.Thread(delegate()
+                {
+                    ExcelFileHandler.Instance.GenerarArchivoAsignaciones(datosGrid);
+                });
+            generarArchivo.IsBackground = true;
+            generarArchivo.Start();
+            MessageBox.Show("Archivo de distribución de calibraciones generado con éxito", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
