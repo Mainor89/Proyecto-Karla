@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Configuration;
 using StJudeAssignmentDistribution_Implementor;
 using StJudeAssignmentDistribution_Library;
+using System.Threading;
 
 namespace StJudeAssignmentDistribution_Gui
 {
@@ -61,16 +62,17 @@ namespace StJudeAssignmentDistribution_Gui
                 var cantidadHorasSemanales = cantidadHoras * decimal.Parse(ConfigurationSettings.AppSettings.Get(DIAS_DE_LA_SEMANA_KEY));
                 var cantidadHorasMensuales = cantidadHorasSemanales * decimal.Parse(ConfigurationSettings.AppSettings.Get(SEMANAS_DEL_MES_KEY));
                 var tecnicoActual = 0;
+                Equipo equipoPasado = null;
                 foreach (var equipo in ExcelFileHandler.Instance.ListaDeEquiposCalibrar)
                 {
-                    var assigned = false;                    
+                    var assigned = false;
                     for (var tecnicoTemp = (tecnicoActual % _CantidadPersonas); tecnicoTemp < _CantidadPersonas; tecnicoTemp++)
                     {
                         if (_ResultadoDistribucionTiempo[tecnicoTemp] + decimal.Parse(equipo.TiempoEstandar) <= cantidadHorasMensuales)
                         {
                             _ResultadoDistribucionTiempo[tecnicoTemp] += decimal.Parse(equipo.TiempoEstandar);
                             _ResultadoDistribucionEquipos[tecnicoTemp].Add(equipo);
-                            assigned = true;                            
+                            assigned = true;
                         }
                         if (assigned)
                         {
@@ -86,6 +88,64 @@ namespace StJudeAssignmentDistribution_Gui
                 }
                 DistribuirEquiposSobrantes();
                 MostrarGridDistribucion();
+            }
+        }
+
+        /// <summary>
+        /// Distribuye el equipo entre los tecnicos
+        /// </summary>
+        /// <param name="pTecnicoIncial"></param>
+        /// <param name="pEquipo"></param>
+        /// <param name="pCantidadHoras"></param>
+        /// <returns></returns>
+        private bool AsignarEquipo(int pTecnicoIncial, Equipo pEquipo, decimal pCantidadHoras)
+        {
+            var asignado = false;
+            var tecnicoTemp = pTecnicoIncial;
+            while (!asignado)
+            {
+                if (_ResultadoDistribucionTiempo[tecnicoTemp] + decimal.Parse(pEquipo.TiempoEstandar) <= pCantidadHoras)
+                {                    
+                    _ResultadoDistribucionTiempo[tecnicoTemp] += decimal.Parse(pEquipo.TiempoEstandar);
+                    _ResultadoDistribucionEquipos[tecnicoTemp].Add(pEquipo);
+                    asignado = true;
+                }
+                else
+                {
+                    tecnicoTemp = SeleccionarTecnicoSiguiente();
+                    if (pTecnicoIncial == tecnicoTemp)
+                    {
+                        break;
+                    }
+                }
+            }
+            return asignado;
+        }
+
+        /// <summary>
+        /// Retorna el Id del técnico que tiene menos horas asignadas
+        /// </summary>
+        /// <returns></returns>
+        private int SeleccionarTecnicoSiguiente()
+        {            
+            var menorTiempo = _ResultadoDistribucionTiempo.Values.Min();
+            List<int> tecnicos = new List<int>();
+            foreach (var tecnico in _ResultadoDistribucionTiempo.Keys)
+            {
+                if (_ResultadoDistribucionTiempo[tecnico] == menorTiempo)
+                {
+                    tecnicos.Add(tecnico);                    
+                }
+            }
+            if (tecnicos.Count == 1)
+            {
+                return tecnicos[0];
+            }
+            else
+            {
+                var generadorRandom = new Random();
+                var indice = tecnicos[(generadorRandom.Next() % tecnicos.Count)];
+                return indice;
             }
         }
 

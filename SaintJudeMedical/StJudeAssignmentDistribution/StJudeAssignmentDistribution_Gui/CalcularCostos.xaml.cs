@@ -76,7 +76,7 @@ namespace StJudeAssignmentDistribution_Gui
                     decimal valorOtrosCostos;
                     decimal.TryParse(otrosCostos, out valorOtrosCostos);                    
                     var equipoSeleccionado = ExcelFileHandler.Instance.ListaDeEquiposUnicos.Find(equipo => equipo.PM.Equals(pmSelected));
-                    var costoTotal = (valorCosto * int.Parse(equipoSeleccionado.TiempoEstandar)) + valorOtrosCostos;
+                    var costoTotal = (valorCosto * decimal.Parse(equipoSeleccionado.TiempoEstandar)) + valorOtrosCostos;
                     LblCostoTitle.Content = "El costo de calibración para el equipo";
                     LblCostoPM.Content = "PM: " + equipoSeleccionado.PM;
                     LblCosto.Content = "es de: " + costoTotal.ToString("N") + " Colones";

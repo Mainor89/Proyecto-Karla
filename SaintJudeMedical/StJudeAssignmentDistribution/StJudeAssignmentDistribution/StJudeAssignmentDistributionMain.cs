@@ -37,7 +37,7 @@ namespace StJudeAssignmentDistribution
                         ResizeMode = ResizeMode.NoResize,
                         Width = 880,
                         Height = 420,
-                        ShowsNavigationUI = false,
+                        ShowsNavigationUI = false,                        
                     };
 
                     var loginPage = new LoginPage();

@@ -152,9 +152,16 @@ namespace StJudeAssignmentDistribution_Gui
                     }
                 }
                 var resultado = dataPm.Union(dataDesc);
-                GridResultado.ItemsSource = null;
-                GridResultado.ItemsSource = resultado;
-                ChangeDGHeaders();
+                if ((dataPm.Count + dataDesc.Count) > 0)
+                {
+                    GridResultado.ItemsSource = null;
+                    GridResultado.ItemsSource = resultado;
+                    ChangeDGHeaders();
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró ningún elemento con esos parámetros de búsqueda.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
         }
 
