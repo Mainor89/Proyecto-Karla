@@ -103,7 +103,7 @@ namespace StJudeAssignmentDistribution_Implementor
                         WorkPackage = MyValues.GetValue(1, 12) != null ? MyValues.GetValue(1, 12).ToString() : string.Empty,
                         WO_Type = MyValues.GetValue(1, 13) != null ? MyValues.GetValue(1, 13).ToString() : string.Empty,
                         ErrorMessage = MyValues.GetValue(1, 14) != null ? MyValues.GetValue(1, 14).ToString() : string.Empty,
-                        TiempoEstandar = "5",
+                        TiempoEstandar = "0",
                     };
                     ListaDeEquiposCalibrar.Add(equipoTemp);
                 }
